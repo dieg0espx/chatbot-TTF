@@ -1,11 +1,11 @@
 import React from 'react'
-import logo from '../images/logo.png'
+import logo from '../images/assitant.png'
 
 function Header() {
   return (
     <div className='header'>
       <img src={logo} />
-      <i className="bi bi-list iconMenu"></i>
+      {/* <i className="bi bi-list iconMenu"></i> */}
     </div>
   )
 }
