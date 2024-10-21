@@ -29,7 +29,7 @@ function Chat() {
     useEffect(() => {
       addMessage('server', 'Hello, how can I help you?');
   }, []);
-  
+
     useEffect(()=>{
         const bubblesElement = document.getElementById('bubbles');
         if (bubblesElement) {
@@ -150,14 +150,7 @@ function Chat() {
 
         </div>
         <div className='input-area'>
-          <div className='container'>
-              <div id="txt">
-                  <textarea onChange={(e)=>setCurrentMessage(e.target.value)} onKeyDown={handleKeyDown} value={currentMessage} placeholder='Ask me something ...'/>
-              </div>
-              <div id="sbmt">
-              <i className="bi bi-arrow-up-circle-fill iconBtnSbmt" onClick={() => currentMessage !== '' && newUserMessage()}></i>
-              </div>
-          </div>
+            <textarea onChange={(e)=>setCurrentMessage(e.target.value)} onKeyDown={handleKeyDown} value={currentMessage} placeholder='Ask me something ...'/> 
         </div>
       </div>
     </div>
