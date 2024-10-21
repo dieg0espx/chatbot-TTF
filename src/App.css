@@ -74,8 +74,8 @@ html {
 }
 
 .chat-page .background {
-  width: 60%;
-  max-width: 200px;
+  width: 50%;
+  max-width: 150px;
   position: fixed;
   left: 50%;
   top: 30%;
