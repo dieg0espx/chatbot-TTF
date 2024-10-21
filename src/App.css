@@ -154,7 +154,7 @@ html {
   min-width: 60px;
   padding: 8px;
   color: white;
-  background-color: rgba(80, 208, 26, 0.7); /* Use rgba to set opacity */
+  background-color: #1fe0ba; /* Use rgba to set opacity */
   border-radius: 10px;
   font-size: 15px;
   font-weight: 500;
