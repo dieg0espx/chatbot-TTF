@@ -3,8 +3,6 @@ import greenBubble from '../images/greenbubble.png'
 import grayBubble from '../images/graybubble.png'
 import background from '../images/logo.png'
 import Header from '../components/Header'
-import { getFirestore, doc, getDoc, collection, addDoc, query, getDocs, } from 'firebase/firestore';
-import { app } from '../Firebase';
 
 
 function Chat() { 
@@ -28,6 +26,10 @@ function Chat() {
     const openAiUrl = process.env.REACT_APP_APIURL;
     // const openAiUrl = 'http://192.168.1.205:4000';
 
+    useEffect(() => {
+      addMessage('server', 'Hello, how can I help you?');
+  }, []);
+  
     useEffect(()=>{
         const bubblesElement = document.getElementById('bubbles');
         if (bubblesElement) {
