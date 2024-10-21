@@ -25,8 +25,8 @@ function Chat() {
     Contact Information: Email - info@ttfscaffolding.com, Phone - 778 898 5301, Address - 10979 Olsen Rd, Surrey, BC V3V 3S9, Canada.
   `;
 
-    // const openAiUrl = process.env.REACT_APP_APIURL;
-    const openAiUrl = 'http://192.168.1.205:4000';
+    const openAiUrl = process.env.REACT_APP_APIURL;
+    // const openAiUrl = 'http://192.168.1.205:4000';
 
     useEffect(()=>{
         const bubblesElement = document.getElementById('bubbles');
@@ -70,30 +70,6 @@ function Chat() {
         addMessage('user', currentMessage); // Add the message
         setCurrentMessage(''); // Clear the current message
     }
-
-    // async function sendRequest(){
-    //     setWaitingResponse(true)
-    //     try {
-    //         const response = await fetch(openAiUrl + '/generate-text', {
-    //           method: 'POST',
-    //           headers: {
-    //             'Content-Type': 'application/json',
-    //           },
-    //           body: JSON.stringify({ prompt: prompt })
-    //         });
-      
-    //         if (!response.ok) {
-    //           throw new Error('Failed to generate text');
-    //         }
-      
-    //         const data = await response.json();
-    //         setServerResponse(data)
-    //         setWaitingResponse(false)
-    //       } catch (error) {
-    //         console.error('Error generating text:', error);
-    //       }
-    // }
-
     function formatConversation() {
       return conversation
         .map((message) => `${message.sender === 'user' ? 'User' : 'Assistant'}: ${message.text}`)
