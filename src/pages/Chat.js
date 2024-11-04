@@ -141,7 +141,7 @@ function Chat() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ prompt:'Hello' })
+          body: JSON.stringify({ prompt: prompt })
         });
 
         if (!response.ok) {
@@ -155,7 +155,6 @@ function Chat() {
     } catch (error) {
         console.error('Error generating text:', error);
     }
-    
 }
 
 
