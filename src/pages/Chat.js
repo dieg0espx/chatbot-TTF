@@ -3,6 +3,7 @@ import greenBubble from '../images/greenbubble.png';
 import grayBubble from '../images/graybubble.png';
 import background from '../images/logo.png';
 import Header from '../components/Header';
+import { capitalize } from '../Utils';
 
 function Chat() {
   const [currentMessage, setCurrentMessage] = useState('');
@@ -17,7 +18,7 @@ function Chat() {
     'Contact',
     'Quotation',
     'Prices',
-    'bout Us',
+    'About Us',
     'Delivery',
     'Other',
   ];
@@ -178,15 +179,11 @@ function Chat() {
           {/* Show submenu options if `showOptions` is true and a category is selected */}
           {showOptions && selectedCategory && submenuOptions.length > 0 && (
             <div className="submenu-container my-4">
-              <p className="text-gray-600 text-left">Select a sub-option:</p>
-              <div className="grid grid-cols-1 gap-2 mt-2">
+              <p className="text-gray-600 text-left">Select a option:</p>
+              <div className="grid grid-cols-2 gap-2 mt-2">
                 {submenuOptions.map((subOption, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleSubOptionClick(subOption)}
-                    className="bg-gray-200 text-gray-700 py-1 px-3 rounded hover:bg-blue-600 hover:text-white"
-                  >
-                    {subOption}
+                  <button key={index} onClick={() => handleSubOptionClick(subOption)} className="bg-gray-200 text-gray-700 py-1 px-3 rounded hover:bg-blue-600 hover:text-white">
+                    {capitalize(subOption)}
                   </button>
                 ))}
               </div>
