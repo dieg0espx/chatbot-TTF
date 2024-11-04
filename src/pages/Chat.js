@@ -180,12 +180,13 @@ function Chat() {
                   message.sender === 'user' ? 'bg-[#1fe0ba] text-white' : 'bg-gray-200 text-black'
                 }`}
               >
-                {message.text.split('\n').map((textPart, idx) => (
+                {/* {message.text.split('\n').map((textPart, idx) => (
                   <React.Fragment key={idx}>
                     {textPart}
                     <br />
                   </React.Fragment>
-                ))}
+                ))} */}
+                {message}
                 <p className={`${message.sender === 'user' ? 'text-right' : 'text-left'} text-[6px] lowercase mt-[2px] mb-[-3px]`}>
                   {message.timestamp.split('|')[1]}
                 </p>
