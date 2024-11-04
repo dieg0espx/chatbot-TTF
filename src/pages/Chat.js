@@ -136,7 +136,7 @@ function Chat() {
     let prompt = 'Re-write as a human this: ' +  answer
 
     try {
-        const response = await fetch(openAiUrl + '/generate-text', {
+        const response = await fetch(openAiUrl + 'generate-text', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
