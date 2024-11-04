@@ -95,43 +95,8 @@ function Chat() {
     }
   };
   
-
-  const handleSubOptionClick = (subOption) => {
-    addMessage('user', subOption);
-
-    const categoryKey = selectedCategory.replace(/[^a-zA-Z]/g, '');
-    const categoryData = data[categoryKey];
-    
-    let subOptionData;
-    if (categoryKey === 'Products') {
-      subOptionData = categoryData.items.find(item => item.name === subOption);
-    } else {
-      subOptionData = categoryData[subOption];
-    }
-
-    if (subOptionData) {
-      addMessage('server', formatAnswer(JSON.stringify(subOptionData)).toString());
-      
-    }
-  };
-
-  const handleKeyDown = (event) => { 
-    if (event.key === 'Enter' && !event.shiftKey && currentMessage !== '') { 
-      event.preventDefault(); 
-      newUserMessage(); 
-    } 
-  }; 
-  
-  const newUserMessage = () => { 
-    addMessage('user', currentMessage); 
-    setCurrentMessage(''); 
-  };
-
-
-
-
   const openAiUrl = process.env.REACT_APP_APIURL;
-  async function formatAnswer(answer) {
+  async function formattedAsnwer (answer) {
     let formattedAsnwer
     let prompt = 'Format this JSON so the people can understand: ' +  answer
 
@@ -150,14 +115,47 @@ function Chat() {
 
         console.log(response.json());
         console.log(typeof(response.json()));
-        
-        
-        return response;
     } catch (error) {
         console.error('Error generating text:', error);
-    }
-    return '....'
+    } 
 }
+
+
+  const handleSubOptionClick = async(subOption) => {
+    addMessage('user', subOption);
+
+    const categoryKey = selectedCategory.replace(/[^a-zA-Z]/g, '');
+    const categoryData = data[categoryKey];
+    
+    let subOptionData;
+    if (categoryKey === 'Products') {
+      subOptionData = categoryData.items.find(item => item.name === subOption);
+    } else {
+      subOptionData = categoryData[subOption];
+    }
+
+    if (subOptionData) {
+      addMessage('server',JSON.stringify(subOptionData));
+      await formattedAsnwer(JSON.stringify(subOptionData))
+    }
+  };
+
+  const handleKeyDown = (event) => { 
+    if (event.key === 'Enter' && !event.shiftKey && currentMessage !== '') { 
+      event.preventDefault(); 
+      newUserMessage(); 
+    } 
+  }; 
+  
+  const newUserMessage = () => { 
+    addMessage('user', currentMessage); 
+    setCurrentMessage(''); 
+  };
+
+
+
+
+
 
 
 
