@@ -18,7 +18,7 @@ function Chat() {
     'Contact',
     'Quotation',
     'Prices',
-    'bout Us',
+    'About Us',
     'Delivery',
     'Other',
   ];
@@ -28,11 +28,9 @@ function Chat() {
     getData();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(conversation);
-    
-  },[conversation])
-
+  }, [conversation]);
 
   async function getData() {
     try {
@@ -43,11 +41,11 @@ function Chat() {
     }
   }
 
-  const addMessage = (sender, text) => {
+  const addMessage = (sender, text = '') => {
     const newMessage = {
       sender: sender,
       timestamp: getTimeStamp(),
-      text: text,
+      text: String(text), // Ensure text is a string
     };
     setConversation((prev) => [...prev, newMessage]);
     setCurrentMessage('');
@@ -62,90 +60,75 @@ function Chat() {
 
   const handleOptionClick = (option) => {
     console.log(data[option]);
-    
     setShowOptions(false);
     setSelectedCategory(option); // Set the selected category
     addMessage('user', option);
     addMessage('server', `Got it! You’re interested in ${option}.`);
-
-    setTimeout(displaySubmenu(option), 500); // Display submenu after a short delay
+    setTimeout(() => displaySubmenu(option), 500); // Display submenu after a short delay
   };
 
   const displaySubmenu = (option) => {
     if (data && option) {
       const categoryData = data[option];
-  
       if (categoryData) {
         const submenu = [];
-  
-        // If the category has nested items (e.g., Products), list all item names; otherwise, use keys as submenu options
         if (categoryData.items && Array.isArray(categoryData.items)) {
           submenu.push(...categoryData.items.map((item) => item.name));
         } else {
           submenu.push(...Object.keys(categoryData));
         }
-  
-        console.log('Submenu options set:', submenu); // Debug statement
+        console.log('Submenu options set:', submenu);
         setSubmenuOptions(submenu);
-  
         setTimeout(() => {
           addMessage('server', 'Please select an option below to learn more:');
           setShowOptions(true);
         }, 500);
       } else {
-        console.log('No data found for selected category:', option); // Debug statement
+        console.log('No data found for selected category:', option);
       }
     } else {
-      console.log('Data or option not found'); // Debug statement
+      console.log('Data or option not found');
     }
   };
-  
+
   const openAiUrl = process.env.REACT_APP_APIURL;
   async function formattedAnswer(answer) {
     const prompt = 'Format this JSON so people can understand: ' + answer;
-  
     try {
-      const response = await fetch(openAiUrl + 'generate-text', {
+      const response = await fetch(openAiUrl + '/generate-text', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ prompt: prompt })
       });
-  
       if (!response.ok) {
         throw new Error('Failed to generate text');
       }
-  
       const data = await response.json(); // Parse response once
-      console.log(data); // Log the parsed JSON
-      console.log(typeof data); // Confirm it's an object
+      console.log(data);
       return data.generated_text; // Assuming the API response has a `generated_text` field
     } catch (error) {
       console.error('Error generating text:', error);
       return 'Sorry, something went wrong while generating the response.';
     }
   }
-  
+
   const handleSubOptionClick = async (subOption) => {
     addMessage('user', subOption);
-  
     const categoryKey = selectedCategory.replace(/[^a-zA-Z]/g, '');
     const categoryData = data[categoryKey];
-    
     let subOptionData;
     if (categoryKey === 'Products') {
       subOptionData = categoryData.items.find(item => item.name === subOption);
     } else {
       subOptionData = categoryData[subOption];
     }
-  
     if (subOptionData) {
       const formattedAnswerText = await formattedAnswer(JSON.stringify(subOptionData, null, 2));
       addMessage('server', formattedAnswerText);
     }
   };
-  
 
   const handleKeyDown = (event) => { 
     if (event.key === 'Enter' && !event.shiftKey && currentMessage !== '') { 
@@ -158,13 +141,6 @@ function Chat() {
     addMessage('user', currentMessage); 
     setCurrentMessage(''); 
   };
-
-
-
-
-
-
-
 
   return (
     <div className="chat-page h-screen overflow-hidden mx-auto">
@@ -181,18 +157,15 @@ function Chat() {
               key={index}
             >
               <div
-                className={`${message.sender === 'user' ? 'user-bubble' : 'server-bubble'} max-w-[80%] w-fit min-w-[60px] py-[8px] px-[15px] rounded-lg text-left ${
-                  message.sender === 'user' ? 'bg-[#1fe0ba] text-white' : 'bg-gray-200 text-black'
-                }`}
-              >
-                {message.text.split('\n').map((textPart, idx) => (
+                className={`${message.sender === 'user' ? 'user-bubble' : 'server-bubble'} max-w-[80%] w-fit min-w-[60px] py-[8px] px-[15px] rounded-lg text-left ${message.sender === 'user' ? 'bg-[#1fe0ba] text-white' : 'bg-gray-200 text-black'}`}>
+                {(typeof message.text === 'string' ? message.text.split('\n') : [message.text]).map((textPart, idx) => (
                   <React.Fragment key={idx}>
                     {textPart}
                     <br />
                   </React.Fragment>
                 ))}                 
                 <p className={`${message.sender === 'user' ? 'text-right' : 'text-left'} text-[6px] lowercase mt-[2px] mb-[-3px]`}>
-                  {message.timestamp.split('|')[1]}
+                  {message.timestamp ? message.timestamp.split('|')[1] : ''}
                 </p>
               </div>
             </div>
@@ -219,7 +192,7 @@ function Chat() {
           {/* Show submenu options if `showOptions` is true and a category is selected */}
           {showOptions && selectedCategory && submenuOptions.length > 0 && (
             <div className="submenu-container my-4">
-              <p className="text-gray-600 text-left">Select a option:</p>
+              <p className="text-gray-600 text-left">Select an option:</p>
               <div className="grid grid-cols-2 gap-2 mt-2">
                 {submenuOptions.map((subOption, index) => (
                   <button key={index} onClick={() => handleSubOptionClick(subOption)} className="bg-gray-200 text-gray-700 py-1 px-3 rounded hover:bg-blue-600 hover:text-white">
