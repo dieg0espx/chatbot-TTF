@@ -110,8 +110,8 @@ function Chat() {
     }
 
     if (subOptionData) {
-      addMessage('server', JSON.stringify(subOptionData, null, 2));
-      formatAnswer(JSON.stringify(subOptionData, null, 2))
+      addMessage('server', formatAnswer(JSON.stringify(subOptionData, null, 2)));
+      
     }
   };
 
@@ -133,7 +133,7 @@ function Chat() {
   const openAiUrl = process.env.REACT_APP_APIURL;
   async function formatAnswer(answer) {
     let formattedAsnwer
-    let prompt = 'answers as if you are an assitant. format this JSON so the people can understand: ' +  answer
+    let prompt = 'Format this JSON so the people can understand: ' +  answer
 
     try {
         const response = await fetch(openAiUrl + 'generate-text', {
@@ -148,13 +148,11 @@ function Chat() {
           throw new Error('Failed to generate text');
         }
 
-        formatAnswer = await response.json();
-        console.log(formatAnswer);
-        
-        
+        return await response.json();
     } catch (error) {
         console.error('Error generating text:', error);
     }
+    return '....'
 }
 
 
