@@ -1,0 +1,150 @@
+{
+  "categories": {
+    "Products": {
+      "description": "Information about the products we offer.",
+      "items": [
+        {
+          "name": "Aluminum Shoring Frames",
+          "description": "Lightweight and sturdy, designed for safety with horizontal ledgers, inter-bracing options, and supports up to 10,000 pounds/leg.",
+          "available_sizes": ["6'H x 4'W", "5'H x 4'W", "4'H x 4'W"]
+        },
+        {
+          "name": "Steel Shoring Frames",
+          "description": "High-quality steel tubes, galvanized or painted, supporting loads up to 10,000 lb with a Factor of Safety of 2.5:1.",
+          "available_sizes": ["6'H x 4'W", "5'H x 4'W", "4'H x 4'W", "3'H x 4'W"]
+        },
+        {
+          "name": "Premium Steel Post Shores",
+          "description": "Featuring quick-release pins, continuous outer tubes, and available in various heights. Ideal for long-term use with labor-saving quick release pins.",
+          "available_sizes": ["No.0 – 6'", "No.1 – 10'3\"", "No.2 – 11'", "No.3 – 13'", "No.4 – 16'"]
+        },
+        {
+          "name": "Aluminum Beams",
+          "description": "Versatile aluminum beams for shoring and formwork, made from alloy 6351-T6. Reduces weight and minimizes worker strain.",
+          "available_sizes": ["20'0\"", "18'0\"", "16'0\"", "14'0\"", "13'0\"", "12'0\"", "10'6\"", "10'0\"", "9'0\"", "8'0\"", "7'0\"", "6'0\"", "5'0\"", "4'0\""]
+        },
+        {
+          "name": "Screw Jacks",
+          "description": "48mm hollow steel shaft with quick-locking T-head bolts, compatible with aluminum and timber stringers.",
+          "available_sizes": ["Aluminum U-Head", "Aluminum Base-Plate", "Steel U-Head", "Steel Base-Plate"]
+        },
+        {
+          "name": "Wood Beams",
+          "description": "Crafted from premium quality wood, providing excellent strength and durability for scaffolding structures.",
+          "available_sizes": ["14'0\"", "12'0\"", "11'0\"", "10'0\"", "9'0\"", "8'0\"", "7'0\"", "6'0\"", "5'0\""]
+        }
+      ]
+    },
+    "Contact": {
+      "phone": "778 898 5301",
+      "email": "info@ttfscaffolding.com",
+      "address": "10979 Olsen Rd, Surrey, BC V3V 3S9, Canada"
+    },
+    "Quotation": {
+      "process": "Submit your drawings. Our experts analyze every detail, calculating the required components meticulously to provide an accurate quote.",
+      "additional_info": "Please contact us via phone or email with your specific requirements for a customized quotation."
+    },
+    "Prices": {
+      "description": "Pricing details for TTF SCAFFOLDING rental services. Pricing varies based on product type, rental duration, and project requirements.",
+      "note": "For accurate pricing, please request a quotation."
+    },
+    "ℹAbout Us": {
+      "title": "We Specialize in Suspended Slab Shoring",
+      "description": "In TTF SCAFFOLDING, we take pride in our extensive expertise in Suspended Slab Shoring Rental and Engineering in Greater Vancouver. Our commitment to excellence and safety sets us apart as a reliable choice for construction professionals.",
+      "experience": "With years of experience, we deliver top-quality equipment and unparalleled service.",
+      "Quality Assurance": {
+        "materials": "Utilizing the finest materials sourced from trusted suppliers undergoing quality control assessments.",
+        "design": "Dedicated to innovation, with research and development enhancing functionality, usability, and efficiency.",
+        "testing": "Products undergo rigorous testing to ensure durability and the ability to withstand construction demands."
+      },
+      "Slab Scaffolding": {
+        "description": "Temporary support structure for pouring or repairing concrete slabs or beams.",
+        "features": [
+          "Support for wet concrete until it gains strength.",
+          "Adjustable to different heights and layouts.",
+          "Ensures worker safety and structural integrity.",
+          "Reusable components for cost-effectiveness."
+        ]
+      },
+      "Process of Slabbing": [
+        "Site Preparation: Excavation and leveling.",
+        "Formwork Installation: Setting up wood or steel forms.",
+        "Reinforcement: Adding steel rebar for strength.",
+        "Concrete Pouring: Spreading and leveling fresh concrete.",
+        "Finishing: Smoothing the surface with tools.",
+        "Curing: Keeping concrete moist for strength.",
+        "Removal of Formwork: Taking down forms after curing."
+      ]
+    },
+    "Delivery": {
+      "description": "Timely delivery with inspected and maintained equipment to ensure your project stays on track.",
+      "locations": [
+        "Vancouver",
+        "Burnaby",
+        "Surrey",
+        "Richmond",
+        "Langley",
+        "Coquitlam",
+        "Delta",
+        "New Westminster",
+        "North Vancouver",
+        "West Vancouver",
+        "Maple Ridge",
+        "Abbotsford",
+        "Port Coquitlam",
+        "Port Moody",
+        "White Rock",
+        "Chilliwack",
+        "Mission",
+        "Pitt Meadows"
+      ],
+      "Fast Shipping": {
+        "description": "Quick delivery to make your projects in Vancouver hassle-free, with ongoing improvements in the process."
+      }
+    },
+    "Other": {
+      "Material Preparation for Return": {
+        "instructions": [
+          {
+            "item": "Steel/Aluminum Frames",
+            "details": "25 pieces per bundle, two straps, laid on the ground."
+          },
+          {
+            "item": "U/Head & Base Plates",
+            "details": "100 pieces per pallet, shrink-wrapped with two straps, heads and feet separated."
+          },
+          {
+            "item": "Aluminum Beams",
+            "details": "30 pieces in two rows of 15, same sizes together, two straps."
+          },
+          {
+            "item": "Post Shores",
+            "details": "50 pieces, 5 rows of 10, with 2x4 between rows, two straps."
+          },
+          {
+            "item": "4x6 Wood Joist",
+            "details": "40 pieces in 5 rows of 8, same size together, two straps."
+          },
+          {
+            "item": "Coupling Pins",
+            "details": "Bag of 50, tied with steel wire. Bags supplied if needed."
+          },
+          {
+            "item": "Beam Clips",
+            "details": "Bag of 100, tied with steel wire or zap strap."
+          },
+          {
+            "item": "Cross Bars",
+            "details": "25 pieces per bundle, same sizes together, two straps."
+          }
+        ]
+      },
+      "Safety Guidelines": {
+        "guidelines": [
+          "All crew must wear harnesses and double lanyards.",
+          "Harnesses should attach to horizontal members between the knee brace and frame leg."
+        ]
+      }
+    }
+  }
+}
