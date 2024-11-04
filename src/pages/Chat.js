@@ -133,7 +133,7 @@ function Chat() {
   const openAiUrl = process.env.REACT_APP_APIURL;
   async function formatAnswer(answer) {
     let formattedAsnwer
-    let prompt = 'Re-write as a human this: ' +  answer
+    let prompt = 'format this JSON so the people can understand: ' +  answer
 
     try {
         const response = await fetch(openAiUrl + 'generate-text', {
