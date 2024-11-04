@@ -96,34 +96,35 @@ function Chat() {
   };
   
   const openAiUrl = process.env.REACT_APP_APIURL;
-  async function formattedAsnwer (answer) {
-    let formattedAsnwer
-    let prompt = 'Format this JSON so the people can understand: ' +  answer
-
+  async function formattedAnswer(answer) {
+    const prompt = 'Format this JSON so people can understand: ' + answer;
+  
     try {
-        const response = await fetch(openAiUrl + 'generate-text', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ prompt: prompt })
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to generate text');
-        }
-
-        console.log(response.json());
-        console.log(typeof(response.json()));
+      const response = await fetch(openAiUrl + '/generate-text', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: prompt })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to generate text');
+      }
+  
+      const data = await response.json(); // Parse response once
+      console.log(data); // Log the parsed JSON
+      console.log(typeof data); // Confirm it's an object
+      return data.generated_text; // Assuming the API response has a `generated_text` field
     } catch (error) {
-        console.error('Error generating text:', error);
-    } 
-}
-
-
-  const handleSubOptionClick = async(subOption) => {
+      console.error('Error generating text:', error);
+      return 'Sorry, something went wrong while generating the response.';
+    }
+  }
+  
+  const handleSubOptionClick = async (subOption) => {
     addMessage('user', subOption);
-
+  
     const categoryKey = selectedCategory.replace(/[^a-zA-Z]/g, '');
     const categoryData = data[categoryKey];
     
@@ -133,12 +134,13 @@ function Chat() {
     } else {
       subOptionData = categoryData[subOption];
     }
-
+  
     if (subOptionData) {
-      addMessage('server',JSON.stringify(subOptionData));
-      await formattedAsnwer(JSON.stringify(subOptionData))
+      const formattedAnswerText = await formattedAnswer(JSON.stringify(subOptionData, null, 2));
+      addMessage('server', formattedAnswerText);
     }
   };
+  
 
   const handleKeyDown = (event) => { 
     if (event.key === 'Enter' && !event.shiftKey && currentMessage !== '') { 
