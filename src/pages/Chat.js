@@ -148,8 +148,8 @@ function Chat() {
           throw new Error('Failed to generate text');
         }
 
-        console.log(response);
-        console.log(typeof(response));
+        console.log(response.json());
+        console.log(typeof(response.json()));
         
         
         return response;
