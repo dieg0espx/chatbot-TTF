@@ -110,7 +110,7 @@ function Chat() {
     }
 
     if (subOptionData) {
-      addMessage('server', formatAnswer(JSON.stringify(subOptionData)));
+      addMessage('server', formatAnswer(JSON.stringify(subOptionData)).toString());
       
     }
   };
