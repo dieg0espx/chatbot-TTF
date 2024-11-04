@@ -136,7 +136,7 @@ function Chat() {
     let prompt = 'Format this JSON so the people can understand: ' +  answer
 
     try {
-        const response = await fetch(openAiUrl + '/generate-text', {
+        const response = await fetch(openAiUrl + 'generate-text', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
