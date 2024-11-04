@@ -107,7 +107,7 @@ function Chat() {
       }
       const data = await response.json(); // Parse response once
       console.log(data);
-      addMessage('server', data.generated_tex);
+      addMessage('server', data);
     } catch (error) {
       console.error('Error generating text:', error);
       return 'Sorry, something went wrong while generating the response.';
