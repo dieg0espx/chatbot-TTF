@@ -148,7 +148,7 @@ function Chat() {
           throw new Error('Failed to generate text');
         }
 
-        return await response.json();
+        return response;
     } catch (error) {
         console.error('Error generating text:', error);
     }
