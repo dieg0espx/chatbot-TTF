@@ -107,7 +107,7 @@ function Chat() {
       }
       const data = await response.json(); // Parse response once
       console.log(data);
-      return data.generated_text; // Assuming the API response has a `generated_text` field
+      addMessage('server', data.generated_tex);
     } catch (error) {
       console.error('Error generating text:', error);
       return 'Sorry, something went wrong while generating the response.';
@@ -125,8 +125,7 @@ function Chat() {
       subOptionData = categoryData[subOption];
     }
     if (subOptionData) {
-      const formattedAnswerText = await formattedAnswer(JSON.stringify(subOptionData, null, 2));
-      addMessage('server', formattedAnswerText);
+      formattedAnswer(JSON.stringify(subOptionData, null, 2));      
     }
   };
 
