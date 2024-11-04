@@ -18,7 +18,7 @@ function Chat() {
     'Contact',
     'Quotation',
     'Prices',
-    'About Us',
+    'bout Us',
     'Delivery',
     'Other',
   ];
@@ -111,6 +111,7 @@ function Chat() {
 
     if (subOptionData) {
       addMessage('server', JSON.stringify(subOptionData, null, 2));
+      formatAnswer(JSON.stringify(subOptionData, null, 2))
     }
   };
 
@@ -125,6 +126,39 @@ function Chat() {
     addMessage('user', currentMessage); 
     setCurrentMessage(''); 
   };
+
+
+
+
+  const openAiUrl = process.env.REACT_APP_APIURL;
+  async function formatAnswer(answer) {
+    let formattedAsnwer
+    let prompt = 'Re-write as a human this: ' +  answer
+
+    try {
+        const response = await fetch(openAiUrl + '/generate-text', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ prompt:'Hello' })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to generate text');
+        }
+
+        formatAnswer = await response.json();
+        console.log(formatAnswer);
+        
+        
+    } catch (error) {
+        console.error('Error generating text:', error);
+    }
+    
+}
+
+
 
   return (
     <div className="chat-page h-screen overflow-hidden mx-auto">
