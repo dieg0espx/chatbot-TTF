@@ -71,35 +71,7 @@
         "Finishing: Smoothing the surface with tools.",
         "Curing: Keeping concrete moist for strength.",
         "Removal of Formwork: Taking down forms after curing."
-      ]
-    },
-    "Delivery": {
-      "description": "Timely delivery with inspected and maintained equipment to ensure your project stays on track.",
-      "locations": [
-        "Vancouver",
-        "Burnaby",
-        "Surrey",
-        "Richmond",
-        "Langley",
-        "Coquitlam",
-        "Delta",
-        "New Westminster",
-        "North Vancouver",
-        "West Vancouver",
-        "Maple Ridge",
-        "Abbotsford",
-        "Port Coquitlam",
-        "Port Moody",
-        "White Rock",
-        "Chilliwack",
-        "Mission",
-        "Pitt Meadows"
       ],
-      "Fast Shipping": {
-        "description": "Quick delivery to make your projects in Vancouver hassle-free, with ongoing improvements in the process."
-      }
-    },
-    "Other": {
       "Material Preparation for Return": {
         "instructions": [
           {
@@ -141,6 +113,32 @@
           "All crew must wear harnesses and double lanyards.",
           "Harnesses should attach to horizontal members between the knee brace and frame leg."
         ]
+      }
+    },
+    "Delivery": {
+      "description": "Timely delivery with inspected and maintained equipment to ensure your project stays on track.",
+      "locations": [
+        "Vancouver",
+        "Burnaby",
+        "Surrey",
+        "Richmond",
+        "Langley",
+        "Coquitlam",
+        "Delta",
+        "New Westminster",
+        "North Vancouver",
+        "West Vancouver",
+        "Maple Ridge",
+        "Abbotsford",
+        "Port Coquitlam",
+        "Port Moody",
+        "White Rock",
+        "Chilliwack",
+        "Mission",
+        "Pitt Meadows"
+      ],
+      "Fast Shipping": {
+        "description": "Quick delivery to make your projects in Vancouver hassle-free, with ongoing improvements in the process."
       }
     }
   }
