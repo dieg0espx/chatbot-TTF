@@ -15,7 +15,6 @@
     const [submenuOptions, setSubmenuOptions] = useState([]); // Track submenu options
     const messagesEndRef = useRef(null); // Ref to track the end of the message list
 
-
     const options = [
         'Products',
         'Contact',
@@ -26,7 +25,6 @@
     ];
 
     useEffect(() => {
-        // addMessage('server', 'Hello, how can I help you? Please select an option below:');
         getData();
     }, []);
 
@@ -238,7 +236,7 @@
 
 
     return (
-        <div className="chat-page h-screen mx-auto">
+    <div className="chat-page h-screen mx-auto">
         <div className="container w-[98%] mx-auto z-1">
             <div className={`max-w-[800px] m-auto bubbles relative p-[10px] z-[3] overflow-y-scroll rounded-t-lg pt-[70px] ${ selectedCategory === 'Other' ? 'h-[calc(100vh-110px)]' : ''}`}>
                 <div className="flex items-center px-4 gap-[20px] w-[450px] m-auto mb-[30px]">
@@ -248,95 +246,93 @@
                         <p className="text-gray-400 text-[30px] text-left -mt-[5px] font-semibold">How can I help you ?  </p>
                     </div>
                 </div>
-            {conversation.map((message, index) => (
-                <div className={`row mb-[5px] flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`} key={index}>
-                <div
-                    className={`${message.sender === 'user' ? 'user-bubble' : 'server-bubble'} max-w-[80%] w-fit min-w-[60px] py-[8px] px-[15px] rounded-2xl text-left ${message.sender === 'user' ? 'bg-black text-white' : 'bg-gray-200 text-black'}`}>
-                    {(typeof message.text === 'string' ? message.text.split('\n') : [message.text]).map((textPart, idx) => (
-                    <React.Fragment key={idx}>
-                        {parseBoldText(textPart)}
-                        <br />
-                    </React.Fragment>
-                    ))}
-                    <p className={`${message.sender === 'user' ? 'text-right' : 'text-left'} text-[6px] lowercase mt-[2px] mb-[-3px]`}>
-                    {message.timestamp ? message.timestamp.split('|')[1] : ''}
-                    </p>
-                </div>
-                </div>
-            ))}
+                {/* CONVERSATION */}
+                {conversation.map((message, index) => (
+                    <div className={`row mb-[5px] flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`} key={index}>
+                    <div
+                        className={`${message.sender === 'user' ? 'user-bubble' : 'server-bubble'} max-w-[80%] w-fit min-w-[60px] py-[8px] px-[15px] rounded-2xl text-left ${message.sender === 'user' ? 'bg-black text-white' : 'bg-gray-200 text-black'}`}>
+                        {(typeof message.text === 'string' ? message.text.split('\n') : [message.text]).map((textPart, idx) => (
+                        <React.Fragment key={idx}>
+                            {parseBoldText(textPart)}
+                            <br />
+                        </React.Fragment>
+                        ))}
+                        <p className={`${message.sender === 'user' ? 'text-right' : 'text-left'} text-[6px] lowercase mt-[2px] mb-[-3px]`}>
+                        {message.timestamp ? message.timestamp.split('|')[1] : ''}
+                        </p>
+                    </div>
+                    </div>
+                ))}
+            
+                {/* MAIN MENU */}
+                {showOptions && (
+                    <div className="options-container my-4">
+                    
+                    {!selectedCategory && (
+                        <>
+                        <p className="text-gray-600 text-left">Please select an option below:</p>
+                        <div className="grid grid-cols-6 gap-2 mt-2">
+                            {options.map((option, index) => (
+                            <button
+                                key={index}
+                                onClick={() => handleOptionClick(option)}s
+                                className="bg-whitet border border-gray-300 px-[2px] text-gray-700 rounded-2xl hover:bg-gray-200  text-center"
+                            >
+                                <span role="img" aria-label="icon" className="mr-[5px]">
+                                {getEmojiForOption(option)}
+                                </span>
+                                {option}
+                            </button>
+                            ))}
+                        </div>
+                        </>
+                    )} 
+                    </div>
+                )}
 
-
-            {/* Show main options if `showOptions` is true and no category selected */}
-            {showOptions && (
-                <div className="options-container my-4">
-
-                {!selectedCategory && (
-                    <>
-                    <p className="text-gray-600 text-left">Please select an option below:</p>
-                    <div className="grid grid-cols-6 gap-2 mt-2">
-                        {options.map((option, index) => (
-                        <button
-                            key={index}
-                            onClick={() => handleOptionClick(option)}s
-                            className="bg-whitet border border-gray-300 px-[2px] text-gray-700 rounded-2xl hover:bg-gray-200  text-center"
-                        >
-                            <span role="img" aria-label="icon" className="mr-[5px]">
-                            {getEmojiForOption(option)}
-                            </span>
-                            {option}
+                {/* SUB-MENU */}
+                {showOptions && selectedCategory && submenuOptions.length > 0 && (
+                    <div className="submenu-container my-4">
+                    <p className="text-gray-600 text-left">Select an option:</p>
+                    <div className="grid grid-cols-2 gap-2 mt-2">
+                        {submenuOptions.map((subOption, index) => (
+                        <button key={index} onClick={() => handleSubOptionClick(subOption)} className="bg-gray-200 text-gray-700 py-3 px-3 rounded-2xl ">
+                            {capitalize(subOption)}
                         </button>
                         ))}
                     </div>
-                    </>
-                )} 
-                </div>
-            )}
-
-            {/* Show submenu options if `showOptions` is true and a category is selected */}
-            {showOptions && selectedCategory && submenuOptions.length > 0 && (
-                <div className="submenu-container my-4">
-                <p className="text-gray-600 text-left">Select an option:</p>
-                <div className="grid grid-cols-2 gap-2 mt-2">
-                    {submenuOptions.map((subOption, index) => (
-                    <button key={index} onClick={() => handleSubOptionClick(subOption)} className="bg-gray-200 text-gray-700 py-3 px-3 rounded-2xl ">
-                        {capitalize(subOption)}
+                    </div>
+                )}
+        
+                {/* BACK BUTTON */}
+                <div className="flex justify-start" style={{ display: !selectedCategory ? 'none' : 'flex' }}>
+                    <button
+                    onClick={() => {
+                        setSelectedCategory(null); // Reset the selected category
+                        setSubmenuOptions([]); // Clear submenu options
+                        setShowOptions(true); // Show main options again
+                        addMessage('server', 'You are back to the main menu.');
+                    }}
+                    className="bg-gray-200 text-gray-700 py-2 px-4 rounded-2xl hover:bg-red-600 hover:text-white mb-4"
+                    >
+                    🔙 Back
                     </button>
-                    ))}
                 </div>
-                </div>
-            )}
-
-
-            {/* BACK BUTTON */}
-            <div className="flex justify-start" style={{ display: !selectedCategory ? 'none' : 'flex' }}>
-                <button
-                onClick={() => {
-                    setSelectedCategory(null); // Reset the selected category
-                    setSubmenuOptions([]); // Clear submenu options
-                    setShowOptions(true); // Show main options again
-                    addMessage('server', 'You are back to the main menu.');
-                }}
-                className="bg-gray-200 text-gray-700 py-2 px-4 rounded-2xl hover:bg-red-600 hover:text-white mb-4"
-                >
-                🔙 Back
-                </button>
             </div>
-            </div>
-            
             {/* Text area for user input */}
             {selectedCategory === 'Other' && (
-            <div className="input-area h-[100px] fixed bottom-[10px] left-0 w-full bg-red-3 z-[997]">
-                <textarea
-                onChange={(e) => setCurrentMessage(e.target.value)}
-                onKeyDown={handleKeyDown}
-                value={currentMessage}
-                placeholder="Ask me something ..."
-                className="w-[98%] h-full p-2 mx-auto resize-none outline-none rounded-lg border border-gray-300 text-[16px]"
-                />
-            </div>
+                <div className="input-area h-[100px] fixed bottom-[10px] left-0 w-full bg-red-3 z-[997]">
+                    <textarea
+                    onChange={(e) => setCurrentMessage(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    value={currentMessage}
+                    placeholder="Ask me something ..."
+                    className="w-[98%] h-full p-2 mx-auto resize-none outline-none rounded-lg border border-gray-300 text-[16px]"
+                    />
+                </div>
             )}
         </div>
-        </div>
+    </div>
     );
     }
 
