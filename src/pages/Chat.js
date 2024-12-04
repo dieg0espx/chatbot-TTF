@@ -115,7 +115,7 @@ function Chat() {
     
   
     try {
-      const response = await fetch(openAiUrl + '/generate-text', {
+      const response = await fetch(openAiUrl + 'generate-text', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
