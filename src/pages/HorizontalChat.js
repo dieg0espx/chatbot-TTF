@@ -14,7 +14,6 @@
     const [data, setData] = useState();
     const [selectedCategory, setSelectedCategory] = useState(null); // Track selected main category
     const [submenuOptions, setSubmenuOptions] = useState([]); // Track submenu options
-    const messagesEndRef = useRef(null); // Ref to track the end of the message list
     const [isLoading, setIsLoading] = useState(false)
 
     const options = [
@@ -29,6 +28,13 @@
     useEffect(() => {
         getData();
     }, []);
+
+    useEffect(() => {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth', // Optional: for smooth scrolling
+        });
+    }, [conversation]);
 
     async function getData() {
         try {
@@ -246,14 +252,16 @@
     <div className="chat-page h-screen mx-auto">
         <div className="container w-[98%] mx-auto z-1">
             <div className={`max-w-[800px] m-auto bubbles relative p-[10px] z-[3] rounded-t-lg pt-[70px] ${ selectedCategory === 'Other' ? 'h-[calc(100vh-110px)]' : ''}`}>
-                <div className="flex items-center px-4 gap-[20px] w-[450px] m-auto mb-[30px]">
+                <div className="flex items-center px-4 gap-[20px] w-[450px] m-auto mb-[30px] ">
                     <img src={icon} alt="Bot Icon" className="h-[100px] w-[100px] object-contain" />
                     <div>
                         <p className="text-gray-400 text-[30px] text-left font-semibold">Hello 👋 </p>
                         <p className="text-gray-400 text-[30px] text-left -mt-[5px] font-semibold">How can I help you ?  </p>
                     </div>
                 </div>
+
                 {/* CONVERSATION */}
+                <div className=''>
                 {conversation.map((message, index) => (
                     <div className={`row mb-[5px] flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`} key={index}>
                     <div
@@ -270,6 +278,8 @@
                     </div>
                     </div>
                 ))}
+                </div>
+            
                 {isLoading ? (
                     <div className="loader">
                         <img src={loader} className='w-[80px] m-auto'/>
@@ -333,18 +343,6 @@
                 )}
 
             </div>
-            {/* TEXT INPUT */}
-            
-                <div className="h-[100px] w-full fixed bottom-[10px] z-[997] border border-red block">
-                    <textarea
-                    onChange={(e) => setCurrentMessage(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    value={currentMessage}
-                    placeholder="Ask me something ..."
-                    className="h-full max-w-[800px] w-full p-2 resize-none outline-none rounded-lg border border-gray-300 text-[16px] m-auto"
-                    />
-                </div>
-            
         </div>
     </div>
     );
