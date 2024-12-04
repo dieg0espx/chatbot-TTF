@@ -238,7 +238,7 @@
     return (
     <div className="chat-page h-screen mx-auto">
         <div className="container w-[98%] mx-auto z-1">
-            <div className={`max-w-[800px] m-auto bubbles relative p-[10px] z-[3] overflow-y-scroll rounded-t-lg pt-[70px] ${ selectedCategory === 'Other' ? 'h-[calc(100vh-110px)]' : ''}`}>
+            <div className={`max-w-[800px] m-auto bubbles relative p-[10px] z-[3] rounded-t-lg pt-[70px] ${ selectedCategory === 'Other' ? 'h-[calc(100vh-110px)]' : ''}`}>
                 <div className="flex items-center px-4 gap-[20px] w-[450px] m-auto mb-[30px]">
                     <img src={icon} alt="Bot Icon" className="h-[100px] w-[100px] object-contain" />
                     <div>
@@ -319,7 +319,7 @@
                     </button>
                 </div>
             </div>
-            {/* Text area for user input */}
+            {/* TEXT INPUT */}
             {selectedCategory === 'Other' && (
                 <div className="input-area h-[100px] fixed bottom-[10px] left-0 w-full bg-red-3 z-[997]">
                     <textarea
