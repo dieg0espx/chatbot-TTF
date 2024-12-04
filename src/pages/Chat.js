@@ -17,7 +17,6 @@ function Chat() {
     'Products',
     'Contact',
     'Quotation',
-    'Prices',
     'About',
     'Delivery',
     'Other',
@@ -28,9 +27,6 @@ function Chat() {
     getData();
   }, []);
 
-  useEffect(() => {
-    console.log(conversation);
-  }, [conversation]);
 
   async function getData() {
     try {
@@ -79,10 +75,17 @@ function Chat() {
         }
         console.log('Submenu options set:', submenu);
         setSubmenuOptions(submenu);
-        setTimeout(() => {
-          addMessage('server', 'Please select an option below to learn more:');
-          setShowOptions(true);
-        }, 500);
+
+        if(submenu[0] =='phone'){
+          console.log('print contact option');
+          const formattedString = "Phone: 778 898 5301\nEmail: info@ttfscaffolding.com\nAddress: 10979 Olsen Rd, Surrey, BC V3V 3S9, Canada";
+          addMessage('server', formattedString);
+        } else {
+          setTimeout(() => {
+            addMessage('server', 'Please select an option below to learn more:');
+            setShowOptions(true);
+          }, 500);
+        }
       } else {
         console.log('No data found for selected category:', option);
       }
@@ -99,6 +102,7 @@ function Chat() {
     - If the question is not related to the data, respond based on general knowledge and ignore the provided data.
     - Do not include programming terms like JSON, keys, or objects in your response.
     - Use bullet points or short sentences for clarity and readability.
+    - Concrete answer.
     - Highlight important elements or keys using **bold text** when necessary. For example: **key**.
     - Do not include symbols like {}, [], :, <>, or anything that a non-technical person might find confusing.
     - Always present the information in a way that a regular person can easily understand.
@@ -135,6 +139,7 @@ function Chat() {
   
 
   async function formattedAnswer(answer) {
+        
     const prompt = ` 
     Organize the information in a clear and readable format using bullet points or short sentences. 
     Use bold text when necessary to highlight important elements or keys. 
@@ -144,8 +149,7 @@ function Chat() {
     Instead, present the information as if you were explaining it to a regular person. 
     
     Here is the data to explain: ${answer}
-    `;
-    
+    `; 
 
     try {
       const response = await fetch(openAiUrl + '/generate-text', {
@@ -243,7 +247,7 @@ function Chat() {
       <Header />
       <img src={background} className="w-[50%] max-w-[150px] fixed left-[50%] top-[30%] transform -translate-x-[45%] z-[2] opacity-[0.05]" />
       <div className="container w-[98%] mx-auto z-1">
-        <div className="bubbles relative h-[calc(100vh-110px)] p-[10px] z-[3] overflow-y-scroll rounded-t-lg pt-[70px]">
+        <div className="max-w-[800px] m-auto bubbles relative h-[calc(100vh-110px)] p-[10px] z-[3] overflow-y-scroll rounded-t-lg pt-[70px]">
           {conversation.map((message, index) => (
             <div className={`row mb-[5px] flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`} key={index}>
               <div
@@ -305,11 +309,14 @@ function Chat() {
             </div>
           )}
 
-          <div className="flex justify-start" style={{display: !selectedCategory ? 'none':'flex'}}>
+
+          {/* BACK BUTTON */}
+          <div className="flex justify-start" style={{ display: !selectedCategory ? 'none' : 'flex' }}>
             <button
               onClick={() => {
                 setSelectedCategory(null); // Reset the selected category
                 setSubmenuOptions([]); // Clear submenu options
+                setShowOptions(true); // Show main options again
                 addMessage('server', 'You are back to the main menu.');
               }}
               className="bg-gray-200 text-gray-700 py-2 px-4 rounded-2xl hover:bg-red-600 hover:text-white mb-4"
@@ -317,6 +324,7 @@ function Chat() {
               🔙 Back
             </button>
           </div>
+
 
 
 

@@ -42,13 +42,13 @@
     },
     "Quotation": {
       "process": "Submit your drawings. Our experts analyze every detail, calculating the required components meticulously to provide an accurate quote.",
-      "additional_info": "Please contact us via phone or email with your specific requirements for a customized quotation."
+      "additional_info": "Please contact us via phone or email with your specific requirements for a customized quotation. phone: 778 898 5301 email: info@ttfscaffolding.com"
     },
     "Prices": "Pricing details for TTF SCAFFOLDING rental services. Pricing varies based on product type, rental duration, and project requirements. For accurate pricing, please request a quotation.",
-    "About Us": {
+    "About": {
       "title": "We Specialize in Suspended Slab Shoring",
       "description": "In TTF SCAFFOLDING, we take pride in our extensive expertise in Suspended Slab Shoring Rental and Engineering in Greater Vancouver. Our commitment to excellence and safety sets us apart as a reliable choice for construction professionals.",
-      "experience": "With years of experience, we deliver top-quality equipment and unparalleled service.",
+      "experience": "In TTF SCAFFOLDING, With over 8 years of experience, we deliver top-quality equipment and unparalleled service.",
       "Quality Assurance": {
         "materials": "Utilizing the finest materials sourced from trusted suppliers undergoing quality control assessments.",
         "design": "Dedicated to innovation, with research and development enhancing functionality, usability, and efficiency.",
@@ -116,7 +116,6 @@
       }
     },
     "Delivery": {
-      "description": "Timely delivery with inspected and maintained equipment to ensure your project stays on track.",
       "locations": [
         "Vancouver",
         "Burnaby",
