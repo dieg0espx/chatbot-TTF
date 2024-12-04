@@ -5,6 +5,7 @@
     import Header from '../components/Header';
     import { capitalize } from '../Utils';
     import icon from '../images/bot.png'
+    import loader from '../images/loader.gif'
 
     function HorizontalChat() {
     const [currentMessage, setCurrentMessage] = useState('');
@@ -14,6 +15,7 @@
     const [selectedCategory, setSelectedCategory] = useState(null); // Track selected main category
     const [submenuOptions, setSubmenuOptions] = useState([]); // Track submenu options
     const messagesEndRef = useRef(null); // Ref to track the end of the message list
+    const [isLoading, setIsLoading] = useState(false)
 
     const options = [
         'Products',
@@ -45,6 +47,7 @@
         };
         setConversation((prev) => [...prev, newMessage]);
         setCurrentMessage('');
+        setIsLoading(false)
     };
 
     const getTimeStamp = () => {
@@ -113,9 +116,10 @@
         Question: ${question}
         `;
         
-    
+        
         try {
-        const response = await fetch(openAiUrl + 'generate-text', {
+            setIsLoading(true);
+            const response = await fetch(openAiUrl + 'generate-text', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
@@ -124,6 +128,7 @@
         });
     
         if (!response.ok) {
+            setIsLoading(false)
             throw new Error('Failed to generate text');
         }
     
@@ -152,6 +157,7 @@
         `; 
 
         try {
+        setIsLoading(true)
         const response = await fetch(openAiUrl + 'generate-text', {
             method: 'POST',
             headers: {
@@ -160,6 +166,7 @@
             body: JSON.stringify({ prompt: prompt })
         });
         if (!response.ok) {
+            setIsLoading(false)
             throw new Error('Failed to generate text');
         }
         const data = await response.json(); // Parse response once
@@ -263,7 +270,11 @@
                     </div>
                     </div>
                 ))}
-            
+                 {isLoading ? (
+                    <div className="loader">
+                        <img src={loader} className='w-[80px] m-auto'/>
+                    </div>
+                 ):(<>
                 {/* MAIN MENU */}
                 {showOptions && (
                     <div className="options-container my-4">
@@ -318,6 +329,9 @@
                     🔙 Back
                     </button>
                 </div>
+                </>
+                )}
+
             </div>
             {/* TEXT INPUT */}
             {selectedCategory === 'Other' && (
