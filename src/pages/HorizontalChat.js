@@ -288,11 +288,11 @@
                  <>
                     {/* MAIN MENU */}
                     {showOptions && (
-                        <div className="options-container my-4">
+                        <div className="options-container my-4 flex-col justify-center items-center">
                         {!selectedCategory && (
                             <>
                             <p className="text-gray-600 text-left">Please select an option below:</p>
-                            <div className="grid grid-cols-6 gap-2 mt-2">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 mt-[20px]  w-full">
                             {options.map((option, index) => (
                             <button
                                 key={index}
