@@ -270,19 +270,19 @@
                     </div>
                     </div>
                 ))}
-                 {isLoading ? (
+                {isLoading ? (
                     <div className="loader">
                         <img src={loader} className='w-[80px] m-auto'/>
                     </div>
-                 ):(<>
-                {/* MAIN MENU */}
-                {showOptions && (
-                    <div className="options-container my-4">
-                    
-                    {!selectedCategory && (
-                        <>
-                        <p className="text-gray-600 text-left">Please select an option below:</p>
-                        <div className="grid grid-cols-6 gap-2 mt-2">
+                 ):(
+                 <>
+                    {/* MAIN MENU */}
+                    {showOptions && (
+                        <div className="options-container my-4">
+                        {!selectedCategory && (
+                            <>
+                            <p className="text-gray-600 text-left">Please select an option below:</p>
+                            <div className="grid grid-cols-6 gap-2 mt-2">
                             {options.map((option, index) => (
                             <button
                                 key={index}
@@ -295,41 +295,41 @@
                                 {option}
                             </button>
                             ))}
+                            </div>
+                            </>
+                        )} 
                         </div>
-                        </>
-                    )} 
-                    </div>
-                )}
+                    )}
 
-                {/* SUB-MENU */}
-                {showOptions && selectedCategory && submenuOptions.length > 0 && (
-                    <div className="submenu-container my-4">
-                    <p className="text-gray-600 text-left">Select an option:</p>
-                    <div className="grid grid-cols-2 gap-2 mt-2">
-                        {submenuOptions.map((subOption, index) => (
-                        <button key={index} onClick={() => handleSubOptionClick(subOption)} className="bg-gray-200 text-gray-700 py-3 px-3 rounded-2xl ">
-                            {capitalize(subOption)}
+                    {/* SUB-MENU */}
+                    {showOptions && selectedCategory && submenuOptions.length > 0 && (
+                        <div className="submenu-container my-4">
+                            <p className="text-gray-600 text-left">Select an option:</p>
+                            <div className="grid grid-cols-2 gap-2 mt-2">
+                                {submenuOptions.map((subOption, index) => (
+                                <button key={index} onClick={() => handleSubOptionClick(subOption)} className="bg-gray-200 text-gray-700 py-3 px-3 rounded-2xl ">
+                                    {capitalize(subOption)}
+                                </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* BACK BUTTON */}
+                    <div className="flex justify-start" style={{ display: !selectedCategory ? 'none' : 'flex' }}>
+                        <button
+                            onClick={() => {
+                                setSelectedCategory(null); // Reset the selected category
+                                setSubmenuOptions([]); // Clear submenu options
+                                setShowOptions(true); // Show main options again
+                                addMessage('server', 'You are back to the main menu.');
+                            }}
+                            className="bg-gray-200 text-gray-700 py-2 px-4 rounded-2xl hover:bg-blue-600 hover:text-white mb-4"
+                            >
+                            🔙 Back
                         </button>
-                        ))}
                     </div>
-                    </div>
-                )}
-        
-                {/* BACK BUTTON */}
-                <div className="flex justify-start" style={{ display: !selectedCategory ? 'none' : 'flex' }}>
-                    <button
-                    onClick={() => {
-                        setSelectedCategory(null); // Reset the selected category
-                        setSubmenuOptions([]); // Clear submenu options
-                        setShowOptions(true); // Show main options again
-                        addMessage('server', 'You are back to the main menu.');
-                    }}
-                    className="bg-gray-200 text-gray-700 py-2 px-4 rounded-2xl hover:bg-red-600 hover:text-white mb-4"
-                    >
-                    🔙 Back
-                    </button>
-                </div>
-                </>
+                 </>
                 )}
 
             </div>
