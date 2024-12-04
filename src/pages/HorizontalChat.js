@@ -334,17 +334,17 @@
 
             </div>
             {/* TEXT INPUT */}
-            {selectedCategory === 'Other' && (
-                <div className="input-area h-[100px] fixed bottom-[10px] left-0 w-full bg-red-3 z-[997]">
+            
+                <div className="h-[100px] w-full fixed bottom-[10px] z-[997] border border-red block">
                     <textarea
                     onChange={(e) => setCurrentMessage(e.target.value)}
                     onKeyDown={handleKeyDown}
                     value={currentMessage}
                     placeholder="Ask me something ..."
-                    className="w-[98%] h-full p-2 mx-auto resize-none outline-none rounded-lg border border-gray-300 text-[16px]"
+                    className="h-full max-w-[800px] w-full p-2 resize-none outline-none rounded-lg border border-gray-300 text-[16px] m-auto"
                     />
                 </div>
-            )}
+            
         </div>
     </div>
     );
