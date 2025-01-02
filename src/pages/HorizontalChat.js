@@ -6,6 +6,8 @@
     import { capitalize } from '../Utils';
     import icon from '../images/bot.png'
     import loader from '../images/loader.gif'
+    import Menu from '../components/Menu';
+    import Loader from '../components/Loader';
 
     function HorizontalChat() {
     const [currentMessage, setCurrentMessage] = useState('');
@@ -20,7 +22,6 @@
         'Products',
         'Contact',
         'Quotation',
-        'About',
         'Delivery',
         'Other',
     ];
@@ -64,12 +65,32 @@
     };
 
     const handleOptionClick = (option) => {
-        console.log(data[option]);
-        setShowOptions(false);
-        setSelectedCategory(option); // Set the selected category
+        console.log(option);
         addMessage('user', option);
-        addMessage('server', `Got it! You’re interested in ${option}.`);
-        setTimeout(() => displaySubmenu(option), 500); // Display submenu after a short delay
+        switch (option) {
+          case 'Delivery':
+            AIFormatText(data.Delivery)
+            break;
+          case 'Contact':
+            AIFormatText(data.Contact)
+            break;
+          case 'Products':
+            displaySubmenu(option);
+            setSelectedCategory(option);
+            break;
+          case 'Quotation': 
+            AIFormatText(data.Quotation)
+            break;
+         case 'Other':
+            window.open(
+                "https://chatbot-ttf.vercel.app/", // URL of the page to open
+                "_blank", // Target name
+                "width=450,height=800" // Window features
+            );
+            break;
+          default:
+            break;
+        }
     };
 
     const displaySubmenu = (option) => {
@@ -247,6 +268,30 @@
         );
     }
 
+    const AIFormatText = async (text) => {
+        const prompt = `re-write this text as an AI asssitant, dont use greetings, use a professional way of answer:  ${text}`; 
+        try {
+        setIsLoading(true)
+        const response = await fetch(openAiUrl + 'generate-text', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ prompt: prompt })
+        });
+        if (!response.ok) {
+            setIsLoading(false)
+            throw new Error('Failed to generate text');
+        }
+        const data = await response.json(); // Parse response once
+        console.log(data);
+        addMessage('server', data);
+        } catch (error) {
+        console.error('Error generating text:', error);
+        return 'Sorry, something went wrong while generating the response.';
+        }
+      }
+
 
     return (
     <div className="chat-page h-screen mx-auto">
@@ -281,9 +326,7 @@
                 </div>
             
                 {isLoading ? (
-                    <div className="loader">
-                        <img src={loader} className='w-[80px] m-auto'/>
-                    </div>
+                    <Loader desktop={true} />
                  ):(
                  <>
                     {/* MAIN MENU */}

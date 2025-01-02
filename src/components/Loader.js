@@ -1,15 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Loader = () => {
+const Loader = ({desktop}) => {
   return (
-    <StyledWrapper>
-      <div className="spinner fixed bottom-[130px] left-[20px]">
-        <div className="spinner1" />
-      </div>
-    </StyledWrapper>
+    <>
+      {!desktop ? (
+        <StyledWrapper>
+          <div className="spinner fixed bottom-[130px] left-[20px]">
+            <div className="spinner1" />
+          </div>
+        </StyledWrapper>
+      ) : (
+        <StyledWrapper>
+          <div className="spinner fixed bottom-[15px] left-[49%]">
+            <div className="spinner1" />
+          </div>
+        </StyledWrapper>
+      )}
+    </>
   );
-}
+};
+
 
 const StyledWrapper = styled.div`
   .spinner {

@@ -8,7 +8,7 @@ import icon from '../images/bot.png'
 import loader from '../images/loader.gif'
 import Menu from '../components/Menu';
 import Loader from '../components/Loader';
-import Typewriter from '../components/TypeWritter';
+
 
 
 function Chat() {
@@ -286,13 +286,13 @@ function Chat() {
         </div>
         
         {/* Text area for user input */}
-        <div className="h-[100px] fixed bottom-[10px] left-0 w-full bg-white z-50">
+        <div className="max-w-[800px] w-full  mx-auto h-[100px] fixed bottom-[10px] left-1/2 transform -translate-x-1/2 bg-white z-50">
           <textarea
             onChange={(e) => setCurrentMessage(e.target.value)}
             onKeyDown={handleKeyDown}
             value={currentMessage}
             placeholder="Ask me something ..."
-            className="w-[98%] h-full p-2 mx-auto resize-none outline-none rounded-lg border border-gray-300 text-[16px]"
+            className="w-[98%] mx-auto h-full p-2 mx-auto resize-none outline-none rounded-lg border border-gray-300 text-[16px]"
           />
         </div>
         
