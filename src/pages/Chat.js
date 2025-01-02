@@ -284,7 +284,7 @@ function Chat() {
         </div>
         
         {/* Text area for user input */}
-        <div className="h-[100px] fixed bottom-[10px] left-0 w-full bg-white">
+        <div className="h-[100px] fixed bottom-[10px] left-0 w-full bg-white z-50">
           <textarea
             onChange={(e) => setCurrentMessage(e.target.value)}
             onKeyDown={handleKeyDown}

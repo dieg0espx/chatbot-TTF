@@ -33,7 +33,7 @@ function Menu({ onOptionSelect }) {
     <>
     {showMenu &&  
         <div 
-            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 z-50"
+            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 z-100"
             onClick={() => setShowMenu(false)}>
             <div className="flex flex-col gap-[5px] w-[200px] fixed bottom-[190px] right-[15px]">
               {options.map((option, index) => (
