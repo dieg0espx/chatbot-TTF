@@ -6,6 +6,8 @@ import Header from '../components/Header';
 import { capitalize } from '../Utils';
 import icon from '../images/bot.png'
 import loader from '../images/loader.gif'
+import Menu from '../components/Menu';
+import Loader from '../components/Loader';
 
 
 function Chat() {
@@ -17,17 +19,10 @@ function Chat() {
   const [submenuOptions, setSubmenuOptions] = useState([]); // Track submenu options
   const [isLoading, setIsLoading] = useState(false)
 
-  const options = [
-      'Products',
-      'Contact',
-      'Quotation',
-      'About',
-      'Delivery',
-      'Other',
-  ];
 
   useEffect(() => {
       getData();
+      addMessage('server',"Hi there 👋 \n I'm your virtual assistant, here to help with all your scaffolding and formwork needs. Whether youre looking for product details, technical support, or project advice, I'm here to assist you. \n How can I help you today? ")
   }, []);
 
   useEffect(() => {
@@ -65,12 +60,25 @@ function Chat() {
   };
 
   const handleOptionClick = (option) => {
-      console.log(data[option]);
-      setShowOptions(false);
-      setSelectedCategory(option); // Set the selected category
+      console.log(option);
       addMessage('user', option);
-      addMessage('server', `Got it! You’re interested in ${option}.`);
-      setTimeout(() => displaySubmenu(option), 500); // Display submenu after a short delay
+      switch (option) {
+        case 'Delivery':
+          AIFormatText(data.Delivery)
+          break;
+        case 'Contact':
+          AIFormatText(data.Contact)
+          break;
+        case 'Products':
+          displaySubmenu(option);
+          setSelectedCategory(option);
+          break;
+        case 'Quotation': 
+          AIFormatText(data.Quotation)
+          break;
+        default:
+          break;
+      }
   };
 
   const displaySubmenu = (option) => {
@@ -85,17 +93,6 @@ function Chat() {
           }
           console.log('Submenu options set:', submenu);
           setSubmenuOptions(submenu);
-
-          if(submenu[0] =='phone'){
-          console.log('print contact option');
-          const formattedString = "Phone: 778 898 5301\nEmail: info@ttfscaffolding.com\nAddress: 10979 Olsen Rd, Surrey, BC V3V 3S9, Canada";
-          addMessage('server', formattedString);
-          } else {
-          setTimeout(() => {
-              addMessage('server', 'Please select an option below to learn more:');
-              setShowOptions(true);
-          }, 500);
-          }
       } else {
           console.log('No data found for selected category:', option);
       }
@@ -120,10 +117,8 @@ function Chat() {
       Here is the data (use only if relevant):
       ${JSON.stringify(data, null, 2)}
       
-      Question: ${question}
+      Question: ${question}s
       `;
-      
-      
       try {
           setIsLoading(true);
           const response = await fetch(openAiUrl + 'generate-text', {
@@ -139,7 +134,7 @@ function Chat() {
           throw new Error('Failed to generate text');
       }
   
-      const responseData = await response.json();
+      const responseData = await response.json(); 
       const generatedText = responseData.trimStart(); // Trim the leading spaces
       console.log(generatedText);
       addMessage('server', generatedText);
@@ -148,8 +143,6 @@ function Chat() {
       return 'Sorry, something went wrong while generating the response.';
       }
   }
-  
-
   async function formattedAnswer(answer) {
           
       const prompt = ` 
@@ -158,7 +151,6 @@ function Chat() {
       For example, format keys like this: **key**.
       Do not use any programming terms like JSON, keys, or objects. 
       Do not include any symbols like {}, [], :, <>, or anything that a non-technical person might find confusing. 
-      Instead, present the information as if you were explaining it to a regular person. 
       
       Here is the data to explain: ${answer}
       `; 
@@ -209,34 +201,6 @@ function Chat() {
       }
   };
 
-  
-
-  const newUserMessage = () => { 
-      addMessage('user', currentMessage); 
-      setCurrentMessage(''); 
-  };
-
-  const getEmojiForOption = (option) => {
-      switch (option) {
-      case 'Products':
-          return '📦'; // Box emoji
-      case 'Contact':
-          return '📞'; // Telephone emoji
-      case 'Quotation':
-          return '💬'; // Speech balloon emoji
-      case 'Prices':
-          return '💲'; // Dollar emoji
-      case 'About':
-          return 'ℹ️'; // Info emoji
-      case 'Delivery':
-          return '🚚'; // Delivery truck emoji
-      case 'Other':
-          return '❓'; // Question mark emoji
-      default:
-          return '❔'; // Default emoji
-      }
-  };
-
   function parseBoldText(text) {
       const parts = text.split(/(\*\*.*?\*\*)/); // Split text into parts, keeping bold markers
       return parts.map((part, index) =>
@@ -246,6 +210,30 @@ function Chat() {
           <React.Fragment key={index}>{part}</React.Fragment>
       )
       );
+  }
+
+  const AIFormatText = async (text) => {
+    const prompt = `re-write this text as an AI asssitant, dont use greetings, use a professional way of answer:  ${text}`; 
+    try {
+    setIsLoading(true)
+    const response = await fetch(openAiUrl + 'generate-text', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: prompt })
+    });
+    if (!response.ok) {
+        setIsLoading(false)
+        throw new Error('Failed to generate text');
+    }
+    const data = await response.json(); // Parse response once
+    console.log(data);
+    addMessage('server', data);
+    } catch (error) {
+    console.error('Error generating text:', error);
+    return 'Sorry, something went wrong while generating the response.';
+    }
   }
 
 
@@ -273,37 +261,10 @@ function Chat() {
           ))}
 
           {isLoading ? (
-               <div className="loader">
-                   <img src={loader} className='w-[80px] m-auto'/>
-               </div>
+              <Loader />
             ):(
             <>
-              {/* Show main options if `showOptions` is true and no category selected */}
-              {showOptions && (
-                <div className="options-container my-4">
-                
-                  {!selectedCategory && (
-                    <>
-                      <p className="text-gray-600 text-left">Please select an option below:</p>
-                      <div className="grid grid-cols-2 gap-2 mt-2">
-                        {options.map((option, index) => (
-                          <button
-                            key={index}
-                            onClick={() => handleOptionClick(option)}
-                            className="bg-gray-200 text-gray-700 py-3 px-3 rounded-2xl hover:bg-blue-600 hover:text-white text-left pl-[30px]"
-                          >
-                            <span role="img" aria-label="icon" className="mr-[10px]">
-                              {getEmojiForOption(option)}
-                            </span>
-                            {option}
-                          </button>
-                        ))}
-                      </div>
-                    </>
-                  )} 
-                </div>
-              )}
-
+              <Menu onOptionSelect={handleOptionClick} />
               {/* Show submenu options if `showOptions` is true and a category is selected */}
               {showOptions && selectedCategory && submenuOptions.length > 0 && (
                 <div className="submenu-container my-4">
@@ -318,36 +279,21 @@ function Chat() {
                 </div>
               )}
             
-              {/* BACK BUTTON */}
-              <div className="flex justify-start" style={{ display: !selectedCategory ? 'none' : 'flex' }}>
-                <button
-                  onClick={() => {
-                    setSelectedCategory(null); // Reset the selected category
-                    setSubmenuOptions([]); // Clear submenu options
-                    setShowOptions(true); // Show main options again
-                    addMessage('server', 'You are back to the main menu.');
-                  }}
-                  className="bg-gray-200 text-gray-700 py-2 px-4 rounded-2xl hover:bg-red-600 hover:text-white mb-4"
-                >
-                  🔙 Back
-                </button>
-              </div>
               </>
             )}
         </div>
         
         {/* Text area for user input */}
-        {selectedCategory === 'Other' && (
-          <div className="input-area h-[100px] fixed bottom-[10px] left-0 w-full bg-white z-[997]">
-            <textarea
-              onChange={(e) => setCurrentMessage(e.target.value)}
-              onKeyDown={handleKeyDown}
-              value={currentMessage}
-              placeholder="Ask me something ..."
-              className="w-[98%] h-full p-2 mx-auto resize-none outline-none rounded-lg border border-gray-300 text-[16px]"
-            />
-          </div>
-        )}
+        <div className="h-[100px] fixed bottom-[10px] left-0 w-full bg-white">
+          <textarea
+            onChange={(e) => setCurrentMessage(e.target.value)}
+            onKeyDown={handleKeyDown}
+            value={currentMessage}
+            placeholder="Ask me something ..."
+            className="w-[98%] h-full p-2 mx-auto resize-none outline-none rounded-lg border border-gray-300 text-[16px]"
+          />
+        </div>
+        
       </div>
     </div>
   );

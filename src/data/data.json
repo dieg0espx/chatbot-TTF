@@ -35,14 +35,8 @@
         }
       ]
     },
-    "Contact": {
-      "phone": "778 898 5301",
-      "email": "info@ttfscaffolding.com",
-      "address": "10979 Olsen Rd, Surrey, BC V3V 3S9, Canada"
-    },
-    "Quotation": {
-      "process": "Submit your drawings. Our experts analyze every detail, calculating the required components meticulously to provide an accurate quote."
-    },
+    "Contact": "You can reach us at 778 898 5301 or email us at info@ttfscaffolding.com. Our address is 10979 Olsen Rd, Surrey, BC V3V 3S9",
+    "Quotation": "Our process to give you a quotation is the following: Submit your drawings. Our experts analyze every detail, calculating the required components meticulously to provide an accurate quote.",
     "Prices": "Pricing details for TTF SCAFFOLDING rental services. Pricing varies based on product type, rental duration, and project requirements. For accurate pricing, please request a quotation.",
     "About": {
       "description": "In TTF SCAFFOLDING, we take pride in our extensive expertise in Suspended Slab Shoring Rental and Engineering in Greater Vancouver. Our commitment to excellence and safety sets us apart as a reliable choice for construction professionals.",
@@ -113,30 +107,6 @@
         ]
       }
     },
-    "Delivery": {
-      "locations": [
-        "Vancouver",
-        "Burnaby",
-        "Surrey",
-        "Richmond",
-        "Langley",
-        "Coquitlam",
-        "Delta",
-        "New Westminster",
-        "North Vancouver",
-        "West Vancouver",
-        "Maple Ridge",
-        "Abbotsford",
-        "Port Coquitlam",
-        "Port Moody",
-        "White Rock",
-        "Chilliwack",
-        "Mission",
-        "Pitt Meadows"
-      ],
-      "Fast Shipping": {
-        "description": "Quick delivery to make your projects in Vancouver hassle-free, with ongoing improvements in the process."
-      }
-    }
+    "Delivery": "Our delivery services cover a wide range of locations, including Vancouver, Burnaby, Surrey, Richmond, Langley, Coquitlam, Delta, New Westminster, North Vancouver, West Vancouver, Maple Ridge, Abbotsford, Port Coquitlam, Port Moody, White Rock, Chilliwack, Mission, and Pitt Meadows. Plus, with our fast shipping, you can count on quick and reliable delivery to keep your projects in Vancouver running smoothly. Delivery fees may apply based on location and order size."
   }
 }
