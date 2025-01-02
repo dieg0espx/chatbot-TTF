@@ -52,4 +52,30 @@ html {
   }
 }
 
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.typewriter {
+  display: inline-block;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  border-right: 2px solid; /* Simulate a cursor */
+  animation: typewriter 4s steps(40, end), blink 1s step-end infinite;
+  width: 0; /* Start with no width */
+}
+
+
 /*  */

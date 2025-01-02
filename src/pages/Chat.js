@@ -8,6 +8,7 @@ import icon from '../images/bot.png'
 import loader from '../images/loader.gif'
 import Menu from '../components/Menu';
 import Loader from '../components/Loader';
+import Typewriter from '../components/TypeWritter';
 
 
 function Chat() {
@@ -249,6 +250,7 @@ function Chat() {
                 className={`${message.sender === 'user' ? 'user-bubble' : 'server-bubble'} max-w-[80%] w-fit min-w-[60px] py-[8px] px-[15px] rounded-2xl text-left ${message.sender === 'user' ? 'bg-black text-white' : 'bg-gray-200 text-black'}`}>
                 {(typeof message.text === 'string' ? message.text.split('\n') : [message.text]).map((textPart, idx) => (
                   <React.Fragment key={idx}>
+                    {/* <Typewriter text={message.t} /> */}
                     {parseBoldText(textPart)}
                     <br />
                   </React.Fragment>
